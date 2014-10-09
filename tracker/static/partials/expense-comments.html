@@ -1,0 +1,23 @@
+<div>
+<div class='row'>
+<div class='col-md-4'>
+<button ng-click='commentCtrl.show_comments(expense)' ng-hide='commentCtrl.displayComments'>Show Comments</button>
+</div>
+</div>
+<section ng-show='commentCtrl.displayComments'>
+<div ng-repeat='comment in commentCtrl.comments'  class='row'>
+	<div class='col-md-4'>
+		{{comment.text}}
+	</div>
+</div>
+<div class='row'>
+
+	<div class='md-col-4'>
+		<textarea ng-model='commentCtrl.comment_text' cols=24 rows=3 />
+		<button class='btn btn-warning' ng-click='commentCtrl.create(expense)'>Send</button>
+	</div>
+</div>
+</section>
+
+
+</div>

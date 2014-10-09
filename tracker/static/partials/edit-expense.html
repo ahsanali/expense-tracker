@@ -1,0 +1,39 @@
+<button ng-click='editExpenseCtrl.edit_expense(expense)'>Edit</button>
+<section >
+    <script type="text/ng-template" id="editExpense.html">
+    <div class="row" >
+		<div class='col-md-3'>
+
+			<div>
+			{{editExpenseModalCtrl.test}}
+			{{editExpenseModalCtrl.selected_expense}}
+			<input type='number' ng-model='selected_expense.amount' placeholder ='Amount'/>
+			</div>
+			<div>
+			<textarea rows = '3' cols = '24' ng-model='selected_expense.description' placeholder='Description' />
+			</div>
+
+		</div>
+
+		<div class="col-md-3">
+            <p class="input-group">
+            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="selected_expense.dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+             </p>
+
+            <timepicker ng-model="selected_expense.tm" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+
+        </div>
+
+</div>
+
+<div class="row" >
+<div class="col-md-3">
+	<button ng-click='edit()' value='Edit Expense' class='btn btn-primary'>Edit Expense</button>
+</div>
+</div>
+
+    </script>
+</section>

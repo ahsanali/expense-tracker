@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+	<login-modal></login-modal>
+
+  <div ng-show='userService.isLoggedIn'>
+  		<expense-creation></expense-creation>
+  		<expenses-list></expenses-list>
+  </div>
+
+
+{% endblock content %}

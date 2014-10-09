@@ -1,0 +1,23 @@
+<section >
+    <script type="text/ng-template" id="myModalContent.html">
+        <form name="loginForm"  ng-submit="login()" novalidate>
+        <div class="modal-body">
+          <fieldset class="form-group">
+            {{credentials.email}}
+            <input ng-model="credentials.email" type="email" class="form-control" placeholder="ahsan@example.org" title="Email" required />
+          </fieldset>
+         <fieldset class="form-group">
+            <input ng-model="credentials.password" type="password" class="form-control" placeholder="password" title="Password" required />
+          </fieldset>
+          <fieldset class="form-group">
+            <button type="submit" class="btn btn-primary">Login</button>
+          </fieldset>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-warning" ng-click="cancel()">Create Account</button>
+        </form>
+            
+        </div>
+    </script>
+
+</section>

@@ -1,0 +1,32 @@
+<div class='row'>
+<div class='col-md-4'>
+<button ng-click='expenseListCtrl.get_expenses()' class='btn btn-secondary'>Get Expenses <input type='number' ng-model='expenseListCtrl.searchWeek'> from now</button>
+</div>
+<div class='col-md-2'>
+	Total Amount : {{expenseListCtrl.total_amount}} 
+</div>
+<div class='col-md-2'>
+	Average Day Spending : {{expenseListCtrl.total_amount / 7}} 
+</div>
+</div>
+<br>
+<section ng-repeat='expense in expenseListCtrl.expenses'>
+<div class='row' >
+	<div class='col-md-2'>
+		{{expense.amount}}
+	</div>
+	<div class='col-md-2'>
+		{{expense.expense_time|date:'longDate'}}
+	</div>
+	<div class='col-md-2'>
+		{{expense.description}}
+	</div>
+	<div class='col-md-2'>
+		{{expense.expense_time|date:'mediumTime'}}
+	</div>
+	<div class='col-md-2'>
+		<edit-expense></edit-expense>
+	</div>
+</div>
+	<expense-comments></expense-comments>
+</section>
