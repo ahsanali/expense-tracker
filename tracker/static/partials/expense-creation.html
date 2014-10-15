@@ -1,11 +1,12 @@
+<form name="expenseCreateForm"  ng-submit="create()" novalidate>
 <div class="row" >
 		<div class='col-md-3'>
 
-			<div>
-			<input type='number' ng-model='expense.amount' placeholder ='Amount'/>
+			<div class="form-group">
+			<input type='number' class="form-control" ng-model='expense.amount' placeholder ='Amount' required/>
 			</div>
-			<div>
-			<textarea rows = '3' cols = '24' ng-model='expense.description' placeholder='Description' />
+			<div class="form-group">
+			<textarea  class="form-control" rows = '3' cols = '24' ng-model='expense.description' placeholder='Description' required/>
 			</div>
 
 		</div>
@@ -21,10 +22,12 @@
             <timepicker ng-model="tm" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
 
         </div>
+    </div>
 </div>
 
 <div class="row" >
 <div class="col-md-3">
-	<button ng-click='create()' value='Create Expense' class='btn btn-primary'>Create Expense</button>
+	<button type="submit" ng-disabled='expenseCreateForm.$invalid' value='Create Expense' class='btn btn-primary'>Create Expense</button>
 </div>
 </div>
+</form>

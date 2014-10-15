@@ -1,19 +1,42 @@
 <div class='row'>
 <div class='col-md-4'>
-<button ng-click='expenseListCtrl.get_expenses()' class='btn btn-secondary'>Get Expenses <input type='number' ng-model='expenseListCtrl.searchWeek'> from now</button>
+<button ng-click='expenseListCtrl.search_active = false;expenseListCtrl.get_expenses()' class='btn btn-secondary'>Get Expenses <input type='number' ng-model='expenseListCtrl.searchWeek'> from now</button>
+</div>
+</div>
+<div class='row'>
+<div class='col-md-2'>
+From:
+<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="expenseListCtrl.search.min_date" is-open="search_min_date_opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
 </div>
 <div class='col-md-2'>
-	Total Amount : {{expenseListCtrl.total_amount}} 
+To:
+<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="expenseListCtrl.search.max_date" is-open="search_max_date_opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
 </div>
 <div class='col-md-2'>
-	Average Day Spending : {{expenseListCtrl.total_amount / 7}} 
+	Minumin Amount:
+	<input type='number' class="form-control" ng-model='expenseListCtrl.search.min_amount' placeholder ='Amount'/>
+</div>
+<div class='col-md-2'>
+	Maximum Amount
+	<input type='number' class="form-control" ng-model='expenseListCtrl.search.max_amount' placeholder ='Amount' />
+</div>
+<div class='col-md-2'>
+	<button ng-click='expenseListCtrl.search_active = true;expenseListCtrl.get_expenses()' class='btn btn-secondary'>Search</button>
+</div>
+</div>
+<div class='row'>
+<div class='col-md-2'>
+	Total Amount : {{expenseListCtrl.total_amount | currency}} 
+</div>
+<div class='col-md-4' ng-hide='expenseListCtrl.search_active'>
+	Average Day Spending : {{expenseListCtrl.total_amount / 7 | currency}} 
 </div>
 </div>
 <br>
 <section ng-repeat='expense in expenseListCtrl.expenses'>
 <div class='row' >
 	<div class='col-md-2'>
-		{{expense.amount}}
+		{{expense.amount | currency}}
 	</div>
 	<div class='col-md-2'>
 		{{expense.expense_time|date:'longDate'}}

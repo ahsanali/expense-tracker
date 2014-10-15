@@ -1,23 +1,63 @@
 <section >
     <script type="text/ng-template" id="myModalContent.html">
-        <form name="loginForm"  ng-submit="login()" novalidate>
+      <section ng-show='login_panel'>  
+        
         <div class="modal-body">
-          <fieldset class="form-group">
-            {{credentials.email}}
-            <input ng-model="credentials.email" type="email" class="form-control" placeholder="ahsan@example.org" title="Email" required />
-          </fieldset>
-         <fieldset class="form-group">
-            <input ng-model="credentials.password" type="password" class="form-control" placeholder="password" title="Password" required />
-          </fieldset>
-          <fieldset class="form-group">
-            <button type="submit" class="btn btn-primary">Login</button>
-          </fieldset>
+          <form name="loginForm"  ng-submit="login()" novalidate>
+            <fieldset class="form-group">
+
+              <input ng-model="credentials.email" type="email" class="form-control" placeholder="ahsan@example.org" title="Email" required />
+            </fieldset>
+           <fieldset class="form-group">
+              <input ng-model="credentials.password" type="password" class="form-control" placeholder="password" title="Password" required />
+            </fieldset>
+            <fieldset class="form-group">
+              <button type="submit" class="btn btn-primary">Login</button>
+            </fieldset>
+         </form> 
         </div>
         <div class="modal-footer">
-            <button class="btn btn-warning" ng-click="cancel()">Create Account</button>
-        </form>
-            
+            <button class="btn btn-warning" ng-click="login_panel=false">Create Account</button>
         </div>
-    </script>
+      </section>
 
+      <section ng-hide='login_panel'>
+
+            <div>{{new_user.errors}}</div>
+            <form name="createAccountForm"  ng-submit="create_account()" novalidate>
+              <div class="modal-body">
+                <fieldset class="form-group">
+                  <input ng-model="new_user.name" type="text" class="form-control" placeholder="Ahsan Ali" title="name" name="name" required />
+               <div ng-show="createAccountForm.name.$dirty && createAccountForm.name.$invalid">
+                  <span ng-show="createAccountForm.name.$error.required">Name is required</span>
+                </div>
+                </fieldset>
+
+                <fieldset class="form-group">
+                  <input ng-model="new_user.email" type="email" class="form-control" placeholder="ahsan@example.org" title="Email" name='email' required />
+                  <div ng-show="createAccountForm.email.$dirty && createAccountForm.email.$invalid">
+                  <span ng-show="createAccountForm.email.$error.required">Email is required</span>
+                  <span ng-show="createAccountForm.email.$error.email">This is not a valid email.</span>
+                  </div>
+                </fieldset>
+
+               <fieldset class="form-group">
+                  <input ng-model="new_user.password" type="password" class="form-control" placeholder="password" title="Password" required />
+                </fieldset>
+               <fieldset class="form-group">
+                  <input ng-model="new_user.confirm_password" type="password" class="form-control" placeholder="confirm password" title="Password" required />
+                </fieldset>
+                <fieldset class="form-group">
+                <input type="radio" ng-model='new_user.sex' value='1'/>Male
+                <input type="radio" ng-model='new_user.sex' value='2'/>Female
+                </fieldset>
+                <fieldset class="form-group">
+                  <button type="submit" class="btn btn-primary" ng-disabled="createAccountForm.$invalid || password_donot_match() ">Create Account</button>
+                </fieldset>
+              </div>
+              <div class="modal-footer">
+                  <button class="btn btn-warning" ng-click="login_panel=true">Login</button>
+              </form> 
+      </section>
+    </script>
 </section>

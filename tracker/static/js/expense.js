@@ -60,8 +60,6 @@
 					      templateUrl: 'editExpense.html',
 					      controller: 'editExpenseModalCtrl',
 					      size: 'lg',
-					      keyboard:false,
-					      backdrop:'static',
 					      controllerAs: 'editExpenseModalCtrl',
 					      resolve: {
 					        selected_expense: function () {
@@ -92,9 +90,12 @@
 		$scope.selected_expense = selected_expense;
 		$scope.selected_expense.dt = new Date(selected_expense.expense_time);
 		$scope.selected_expense.tm = new Date(selected_expense.expense_time);
-		$log.info(selected_expense)
-		this.test = "asdasd";
-		$scope.credentials = {};
+		
+		//Time Picker
+		$scope.hstep = 1;
+		$scope.mstep = 15;
+		$scope.ismeridian = true;
+
 		var modal =  $modalInstance;
 		$scope.edit = function(){
 			var expense = {};

@@ -4,8 +4,9 @@ from flask.ext.restful import  Resource
 from tracker.extensions import db, api
 from tracker.models import Comment, Expense
 from tracker.forms import CommentCreateForm
-from flask.ext.login import login_required, current_user
+from flask.ext.login import current_user
 from tracker.utils import seconds_since_week
+from tracker.decorators import login_required
 
 class CommentView(Resource):
 

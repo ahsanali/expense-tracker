@@ -5,15 +5,19 @@
 </div>
 </div>
 <section ng-show='commentCtrl.displayComments'>
-<div ng-repeat='comment in commentCtrl.comments'  class='row'>
-	<div class='col-md-4'>
+<ul>
+<li ng-repeat='comment in commentCtrl.comments'>
+
 		{{comment.text}}
-	</div>
-</div>
+
+</li>
+</ul>
 <div class='row'>
 
-	<div class='md-col-4'>
-		<textarea ng-model='commentCtrl.comment_text' cols=24 rows=3 />
+	<div class='col-md-4'>
+		<div class='form-group'>
+		<textarea class="form-control" ng-model='commentCtrl.comment_text' cols=24 rows=3 />
+		</div>
 		<button class='btn btn-warning' ng-click='commentCtrl.create(expense)'>Send</button>
 	</div>
 </div>

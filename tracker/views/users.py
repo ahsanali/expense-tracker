@@ -4,7 +4,7 @@ from flask.ext.restful import  Resource
 from tracker.extensions import db, api
 from tracker.models import User
 from tracker.forms import UserCreateForm, SessionCreateForm
-from flask.ext.login import login_user
+from flask.ext.login import login_user, current_user
 
 class UserView(Resource):
     
@@ -18,9 +18,10 @@ class UserView(Resource):
         
         form.populate_obj(user)
         
-        db.session.add(user)
-        db.session.commit()
+        user.save()
         
+        login_user(user)
+
         return 201
 
 class SessionView(Resource):
@@ -39,6 +40,11 @@ class SessionView(Resource):
                 return 200
         
         return "Login Failed", 401
+
+    def get(self):
+        if current_user.is_authenticated():
+            return current_user.to_dict(),200
+        return  'Login Required',401
 
 api.add_resource(UserView, '/api/v1/user')
 api.add_resource(SessionView, '/api/v1/session', endpoint = 'login')

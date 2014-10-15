@@ -1,21 +1,20 @@
 <button ng-click='editExpenseCtrl.edit_expense(expense)'>Edit</button>
 <section >
     <script type="text/ng-template" id="editExpense.html">
+    <form name="expenseEditForm"  ng-submit="edit()" novalidate>
     <div class="row" >
-		<div class='col-md-3'>
+		<div class='col-md-5'>
 
-			<div>
-			{{editExpenseModalCtrl.test}}
-			{{editExpenseModalCtrl.selected_expense}}
-			<input type='number' ng-model='selected_expense.amount' placeholder ='Amount'/>
+			<div class="form-group">
+			<input class="form-control" type='number' ng-model='selected_expense.amount' placeholder ='Amount' required/>
 			</div>
-			<div>
-			<textarea rows = '3' cols = '24' ng-model='selected_expense.description' placeholder='Description' />
+			<div class="form-group">
+			<textarea class="form-control" rows = '3' cols = '24' ng-model='selected_expense.description' placeholder='Description' required/>
 			</div>
 
 		</div>
 
-		<div class="col-md-3">
+		<div class="col-md-4">
             <p class="input-group">
             <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="selected_expense.dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
               <span class="input-group-btn">
@@ -31,9 +30,9 @@
 
 <div class="row" >
 <div class="col-md-3">
-	<button ng-click='edit()' value='Edit Expense' class='btn btn-primary'>Edit Expense</button>
+	<button type="submit" ng-disabled='expenseEditForm.$invalid' value='Edit Expense' class='btn btn-primary'>Edit Expense</button>
 </div>
 </div>
-
+</form>
     </script>
 </section>

@@ -3,8 +3,9 @@ from flask.ext.restful import  Resource
 
 from tracker.extensions import db, api
 from tracker.models import Expense
-from tracker.forms import ExpenseCreateForm
-from flask.ext.login import login_required, current_user
+from tracker.forms import ExpenseCreateForm, ExpenseSearchForm
+from flask.ext.login import current_user
+from tracker.decorators import login_required
 from tracker.utils import seconds_since_week
 
 class ExpenseView(Resource):
@@ -42,7 +43,7 @@ class ExpenseListView(Resource):
 		expenses = Expense.get_user_expenses()
 		data = [expense.to_dict() for expense in expenses]
 		total_amount = sum([x.amount for x in expenses])
-		return {total_amount:total_amount,expenses:data}
+		return {'total_amount':total_amount,'expenses':data}
 
 class ExpenseAnalytics(Resource):
 
@@ -54,10 +55,23 @@ class ExpenseAnalytics(Resource):
 		total_amount = sum([x.amount for x in expenses])
 		return {'total_amount':total_amount,'expenses':data}
 
+class ExpenseSearch(Resource):
 
+	@login_required
+	def post(self):
+		form = ExpenseSearchForm()
+
+		if not form.validate_on_submit():
+			return form.errors, 422
+
+		expenses =  form.get_filters().all()
+		data = [expense.to_dict() for expense in expenses]
+		total_amount = sum([x.amount for x in expenses])
+		return {'total_amount':total_amount,'expenses':data}
 
 
 api.add_resource(ExpenseView, '/api/v1/expense', endpoint = 'expense')
 api.add_resource(ExpenseEditView, '/api/v1/expense/<int:expense_id>', endpoint = 'expenseEdit')
 api.add_resource(ExpenseListView, '/api/v1/expenses/', endpoint = 'expenses')
 api.add_resource(ExpenseAnalytics, '/api/v1/expenses/week/<int:week>', endpoint = 'expenseAnalytics')
+api.add_resource(ExpenseSearch, '/api/v1/expenses/search/', endpoint = 'expenseSearch')

@@ -7,15 +7,19 @@ from tracker.utils import get_current_time, SEX_TYPE, STRING_LEN
 # from .constants import USER, USER_ROLE, ADMIN, INACTIVE, USER_STATUS
 from flask.ext.login import UserMixin
 import pdb
+from mixins import SaveDeleteMixin,SerializationMixin
+from tracker.serializers import UserSerializer
 
-class User(db.Model, UserMixin):
+
+class User(db.Model, UserMixin,SaveDeleteMixin,SerializationMixin):
 
     __tablename__ = 'users'
+    __serializer__ = UserSerializer
 
     id = Column(db.Integer, primary_key=True)
     name = Column(db.String(STRING_LEN), nullable=False, unique=True)
     email = Column(db.String(STRING_LEN), nullable=False, unique=True)
-    activation_key = Column(db.String(STRING_LEN))
+    # activation_key = Column(db.String(STRING_LEN))
     created_time = Column(db.DateTime, default=get_current_time)
     age = Column(db.Integer)
     phone = Column(db.String(STRING_LEN))

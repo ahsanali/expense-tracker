@@ -26,7 +26,7 @@ def create_app(config=None, app_name=None, blueprints=None):
         blueprints = DEFAULT_BLUEPRINTS
 
     app = Flask(app_name, instance_path=INSTANCE_FOLDER_PATH, instance_relative_config=True)
-    app.secret_key = "sdjf980qwrlmcff~*&8s9ua/22318*91()sdf20234!((#-wf,v02ksa==+"
+    app.secret_key = "sdjf980qwrlmcff~*&8s9ua/2118*91()sdf20234!((#-wf,v02ksa==+"
     configure_app(app, config)
     configure_blueprints(app, blueprints)
     configure_extensions(app)
@@ -71,12 +71,14 @@ def configure_extensions(app):
     api.init_app(app)
     
     # flask-login
+    login_manager.init_app(app)
     login_manager.login_view = 'login'
 
     @login_manager.user_loader
     def load_user(id):
         return User.query.get(id)
-    login_manager.setup_app(app)
+    
+
 
 
 
