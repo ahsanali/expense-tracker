@@ -22,14 +22,14 @@ setup(
         'Flask-Mail',
         'Flask-Cache',
         'Flask-Login',
-        'Flask-OpenID',
         'nose',
         'tornado',
         'psycopg2',
         'wtforms_alchemy',
         'flask-restful',
         'Flask-WTF',
-        'marshmallow'
+        'marshmallow',
+        'nose'
     ],
     classifiers=[
         'Environment :: Web Environment',

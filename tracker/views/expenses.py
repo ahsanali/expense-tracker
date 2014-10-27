@@ -22,7 +22,7 @@ class ExpenseView(Resource):
 		expense.user = current_user
 		expense.save()
 
-		return 201
+		return "Created",201
 
 class ExpenseEditView(Resource):
 
@@ -34,6 +34,7 @@ class ExpenseEditView(Resource):
 		expense = Expense.query.get_or_404(expense_id)
 		form.populate_obj(expense)
 		expense.save()
+		return "OK",200
 
 
 class ExpenseListView(Resource):

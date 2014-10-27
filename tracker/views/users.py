@@ -4,7 +4,7 @@ from flask.ext.restful import  Resource
 from tracker.extensions import db, api
 from tracker.models import User
 from tracker.forms import UserCreateForm, SessionCreateForm
-from flask.ext.login import login_user, current_user
+from flask.ext.login import login_user, current_user, logout_user
 
 class UserView(Resource):
     
@@ -22,7 +22,7 @@ class UserView(Resource):
         
         login_user(user)
 
-        return 201
+        return "Created",201
 
 class SessionView(Resource):
 
@@ -46,6 +46,15 @@ class SessionView(Resource):
             return current_user.to_dict(),200
         return  'Login Required',401
 
+class SessionDestroyView(Resource):
+    
+    def get(self):
+        logout_user()
+        return "Log Out", 200
+
+
+
 api.add_resource(UserView, '/api/v1/user')
 api.add_resource(SessionView, '/api/v1/session', endpoint = 'login')
+api.add_resource(SessionDestroyView, '/api/v1/logout', endpoint = 'logout')
 

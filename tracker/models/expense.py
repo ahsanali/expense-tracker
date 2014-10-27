@@ -15,7 +15,7 @@ class Expense(db.Model,SaveDeleteMixin,SerializationMixin):
     description = Column(db.Text, nullable=False)
     created_time = Column(db.DateTime, default=get_current_time)
     expense_time = Column(db.BIGINT,nullable=False)
-    amount = Column(db.FLOAT)
+    amount = Column(db.FLOAT,nullable=False)
     user_id = Column(db.Integer, db.ForeignKey("users.id"))
 
     @classmethod

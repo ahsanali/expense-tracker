@@ -117,7 +117,7 @@ def seconds_since_week(week):
     days = week * 7
     current_time = datetime.utcnow()
     days = days + current_time.weekday()
-    start_time = current_time - timedelta(days = days, hours = current_time.hour)
+    start_time = current_time - timedelta(days = days, hours = current_time.hour,minutes = current_time.minute,seconds = current_time.second)
     end_time = start_time + timedelta(days = 7)
     return [int(start_time.strftime('%s'))*1000,int(end_time.strftime('%s'))*1000]
 

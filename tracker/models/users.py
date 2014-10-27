@@ -65,9 +65,9 @@ class User(db.Model, UserMixin,SaveDeleteMixin,SerializationMixin):
 
     @classmethod
     def authenticate(cls, login, password):
-        # pdb.set_trace()
+
         user = cls.query.filter(User.email == login).first()
-        print user
+        
         if user:
             authenticated = user.check_password(password)
         else:
@@ -75,17 +75,7 @@ class User(db.Model, UserMixin,SaveDeleteMixin,SerializationMixin):
 
         return user, authenticated
 
-    # @classmethod
-    # def search(cls, keywords):
-    #     criteria = []
-    #     for keyword in keywords.split():
-    #         keyword = '%' + keyword + '%'
-    #         criteria.append(db.or_(
-    #             User.name.ilike(keyword),
-    #             User.email.ilike(keyword),
-    #         ))
-    #     q = reduce(db.and_, criteria)
-    #     return cls.query.filter(q)
+
 
     @classmethod
     def get_by_id(cls, user_id):
