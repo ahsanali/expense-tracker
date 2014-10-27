@@ -8,7 +8,7 @@
 <ul>
 <li ng-repeat='comment in commentCtrl.comments'>
 
-		{{comment.text}}
+		{{comment.text}} -- <small>{{comment.pub_date|date:'longDate'}}</small>
 
 </li>
 </ul>

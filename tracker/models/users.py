@@ -17,7 +17,7 @@ class User(db.Model, UserMixin,SaveDeleteMixin,SerializationMixin):
     __serializer__ = UserSerializer
 
     id = Column(db.Integer, primary_key=True)
-    name = Column(db.String(STRING_LEN), nullable=False, unique=True)
+    name = Column(db.String(STRING_LEN), nullable=False)
     email = Column(db.String(STRING_LEN), nullable=False, unique=True)
     # activation_key = Column(db.String(STRING_LEN))
     created_time = Column(db.DateTime, default=get_current_time)
@@ -48,20 +48,6 @@ class User(db.Model, UserMixin,SaveDeleteMixin,SerializationMixin):
             return False
         return check_password_hash(self.password, password)
 
-    # def reset_password(self):
-    #     self.activation_key = str(uuid4())
-    #     db.session.add(self)
-    #     db.session.commit()
-
-    # def change_password(self):
-    #     self.password = self.password.data
-    #     self.activation_key = None
-    #     db.session.add(self)
-    #     db.session.commit()
-
-
-# ================================================================
-    # Class methods
 
     @classmethod
     def authenticate(cls, login, password):
@@ -81,5 +67,4 @@ class User(db.Model, UserMixin,SaveDeleteMixin,SerializationMixin):
     def get_by_id(cls, user_id):
         return cls.query.filter_by(id=user_id).first_or_404()
 
-    def check_name(self, name):
-        return User.query.filter(db.and_(User.name == name, User.email != self.id)).count() == 0
+

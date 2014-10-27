@@ -54,11 +54,8 @@
 		$scope.login = function(){
 			$http.post('/api/v1/session',
 				{
-				 // 'email':$scope.credentials.email,
-				 // 'password':$scope.credentials.password
-				 'email':'sn.ahsanali1@gmail.com',
-				 'password':'test'
-
+				 'email':$scope.credentials.email,
+				 'password':$scope.credentials.password
 				}
 				).success(function(data){
 					modal.close();
