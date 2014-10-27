@@ -202,6 +202,28 @@ class TestExpenseSearch(TestCase):
 		assert len(expenses['expenses']) == 1
 
 
+class TestCommentView(TestCase):
+
+	def test_post(self):
+		""" Test Comment Creation"""
+		self.login(self.demo_user_details['email'],self.demo_user_details['password'])
+		data = dict(
+            text = "very expensive",
+		)
+		response = self.client.post('/api/v1/comment/%s'%self.expense.id, data=data, follow_redirects=True)
+		self.assert_200(response)
+
+class TestCommentListView(TestCase):
+	
+	def test_get(self):
+		""" Test Comments List"""
+		self.login(self.demo_user_details['email'],self.demo_user_details['password'])
+		response = self.client.get('/api/v1/comments/%s'%self.expense.id, follow_redirects=True)
+		self.assert_200(response)
+		comments = json.loads(response.data)
+		assert len(comments) == 1
+
+
 
 
 
