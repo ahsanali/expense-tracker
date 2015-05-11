@@ -46,7 +46,7 @@ class DefaultConfig(BaseConfig):
     MAIL_USE_SSL = False
     # Should put MAIL_USERNAME and MAIL_PASSWORD in production under instance folder.
     MAIL_USERNAME = 'ahsan.snali'
-    MAIL_PASSWORD = 'batista1'
+    MAIL_PASSWORD = 'xxxxxxxxx'
     DEFAULT_MAIL_SENDER = '%s@gmail.com' % MAIL_USERNAME
 
     # Flask-openid: http://pythonhosted.org/Flask-OpenID/
